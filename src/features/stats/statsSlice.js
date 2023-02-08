@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 
 const apiUrl = "https://odds.p.rapidapi.com/v4/sports"
-const apiKey = "1240f4bf06msh22e9d539d535101p1b1ff3jsn337bd1967b6d"
+const apiKey = process.env.REACT_APP_API_KEY
 const apiHost = "odds.p.rapidapi.com"
 
 const initialState = {
