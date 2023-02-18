@@ -5,6 +5,8 @@ import "ag-grid-community/styles/ag-theme-alpine.css"
 import { sumDay, resLP } from "../utils/numerlogyCalcs"
 import { useDispatch, useSelector } from "react-redux"
 import { PremiumPicks } from "./PremiumPicks"
+import { generate as generateComb } from "ordered-uuid-v4"
+
 import { selectedHandler, clearStats } from "../features/stats/statsSlice"
 
 const Table = () => {
@@ -12,7 +14,7 @@ const Table = () => {
     loading,
     value,
     team,
-    stats: { data },
+    stats: data,
     logo
   } = useSelector((store) => store.stats)
   const dispatch = useDispatch()
@@ -55,6 +57,9 @@ const Table = () => {
     }
   }
 
+  // generates uuid v4, used for later to retrieve picks
+  const comb = generateComb()
+
   // Extracts data from api and pushes to empty array
   // Empty array where raw data is pushed to from api
   const tableData = []
@@ -71,6 +76,7 @@ const Table = () => {
         outcomes.map((line) => {
           const { name, price } = line
           tableData.push({
+            id: comb,
             away: away_team,
             home: home_team,
             title: sport_title,

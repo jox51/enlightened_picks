@@ -19,31 +19,30 @@ const Sports = () => {
 
   return (
     <>
-      <section className="sports flex justify-center items-center shadow-md">
-        <Logo />
+      <section className="sports flex justify-center items-center shadow-md pb-4">
         <button
-          className="bg-lightGreen w-20 h-30 rounded-lg text-ochre-900 text-lg font-bold m-5"
+          className="btn  text-lg font-bold m-5"
           id="basketball"
           onClick={(e) => localHandler(e)}
         >
           <i className="fa-solid fa-basketball"></i>
         </button>
         <button
-          className="bg-lightGreen w-20 h-30 rounded-lg text-ochre-900 text-lg font-bold m-5"
+          className="btn  text-lg font-bold m-5"
           id="americanfootball"
           onClick={(e) => localHandler(e)}
         >
           <i className="fa-solid fa-football"></i>
         </button>
         <button
-          className="bg-lightGreen w-20 h-30 rounded-lg text-ochre-900 text-lg font-bold m-5"
+          className="btn  text-lg font-bold m-5"
           id="soccer"
           onClick={(e) => localHandler(e)}
         >
           <i className="fa-solid fa-futbol"></i>
         </button>
         <button
-          className="bg-lightGreen w-20 h-30 rounded-lg text-ochre-900 text-lg font-bold m-5"
+          className="btn  text-lg font-bold m-5"
           id="baseball_mlb"
           onClick={(e) => localHandler(e)}
         >

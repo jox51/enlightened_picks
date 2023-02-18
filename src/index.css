@@ -1,10 +1,20 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+.body {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+
+
 
 .ag-theme-alpine {
   --ag-header-height: 30px;
@@ -31,6 +41,7 @@
   border-color: var(--ag-border-color, #babfc7) !important;
 }
 
+
 @layer components {
   .my-shaded-effect {
     @apply bg-darkerGreen;
@@ -40,6 +51,15 @@
   }
   .btn {
     @apply bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 shadow-md border border-darkGrayishGreen hover:border-transparent rounded;
+  }
+  .btn-landing {
+    @apply shadow-md py-3 px-6 rounded-md transition duration-300
+  }
+  .btn-purple{
+    @apply bg-bookmark-purple text-white
+  }
+  .btn-white{
+    @apply bg-bookmark-white
   }
 }
 
