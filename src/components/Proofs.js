@@ -10,7 +10,7 @@ const Proofs = () => {
       <div className="divider"></div>
       <section className="flex flex-col h-full gap-5">
         <div className="border-2 justify-center items-center text-center py-5">
-          <div class="text-gray-900 text-xl mx-auto font-mono font-semibold border-r-2 border-black w-[47ch] whitespace-nowrap overflow-hidden animate-typing [--ch-length:47]">
+          <div className="text-gray-900 text-xl mx-auto font-mono font-semibold border-r-2 border-black w-[47ch] whitespace-nowrap overflow-hidden animate-typing [--ch-length:47]">
             Want Proof? Below are some of our recent wins.
           </div>
           <p className="animate-fade-right animate-duration-[3000ms] text-justify mx-auto py-6 max-w-sm">

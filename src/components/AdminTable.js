@@ -34,7 +34,7 @@ const AdminTable = () => {
       headerName: "Away Team",
       checkboxSelection: true
     },
-    { field: "home", headerName: "Away Team" },
+    { field: "home", headerName: "Home Team" },
     { field: "title", headerName: "League" },
     { field: "books" },
     { field: "line_name", headerName: "Line Name", editable: true },
@@ -58,6 +58,7 @@ const AdminTable = () => {
     return item
   })
 
+  // Used to edit fields in the admin table
   const onCellEditRequest = useCallback(
     (event) => {
       const data = event.data
@@ -76,7 +77,7 @@ const AdminTable = () => {
     [rowImmutableStore]
   )
 
-  // Makes all columns filterable and usable
+  // Standard col defs
   const defaultColDef = useMemo(
     () => ({
       sortable: true,
@@ -96,7 +97,7 @@ const AdminTable = () => {
     }
   }
 
-  //grabs selected rows
+  // Saves and sends selected rows to Strapi, calls these rows for retrieval in final edit in subs table
   const saveHandler = useCallback(() => {
     const selectedRows = gridRef.current.api.getSelectedRows()
     dispatch(selectedFinalRows(selectedRows))
@@ -117,6 +118,7 @@ const AdminTable = () => {
     }, 2000)
   }, [])
 
+  // Defines empty fields in case a pick is to be added
   const addPicksHandler = () => {
     const emptyObj = {
       away: "",
@@ -134,17 +136,17 @@ const AdminTable = () => {
     dispatch(clearSelections())
   }
 
-  // Below code converts data from server to AG Grid array data
-  let convertArr = []
-  const picksConvert = loadedPicks.map((pick, id) => {
-    const { attributes } = pick
-    const { picks } = attributes
-    let tempArr = JSON.parse(picks)
-    // let sentArr = tempArr.map((item) => {
-    //   return convertArr.push(item)
-    // })
-    convertArr.push(tempArr)
-  })
+  // // Below code converts data from server to AG Grid array data
+  // let convertArr = []
+  // const picksConvert = loadedPicks.map((pick, id) => {
+  //   const { attributes } = pick
+  //   const { picks } = attributes
+  //   let tempArr = JSON.parse(picks)
+  //   // let sentArr = tempArr.map((item) => {
+  //   //   return convertArr.push(item)
+  //   // })
+  //   convertArr.push(tempArr)
+  // })
 
   return (
     <div className="ag-theme-alpine h-1/2 w-30 m-10 pb-10">

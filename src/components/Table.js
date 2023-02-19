@@ -21,7 +21,7 @@ const Table = () => {
 
   const columnDefs = [
     { field: "away", headerName: "Away Team", checkboxSelection: true },
-    { field: "home", headerName: "Away Team" },
+    { field: "home", headerName: "Home Team" },
     { field: "title", headerName: "League" },
     { field: "books" },
     { field: "line_name", headerName: "Line Name" },
