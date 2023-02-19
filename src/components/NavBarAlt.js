@@ -6,28 +6,12 @@ import logo4 from "../images/logo_four.png"
 import AuthLogin from "../components/AuthLogin"
 import AuthLogout from "../components/AuthLogout"
 import Profile from "../components/Profile"
-import { themeChange } from "theme-change"
 import { useAuth0 } from "@auth0/auth0-react"
 import AdminLinks from "../components/AdminLinks"
 import ToggleBtn from "../components/ToggleBtn"
-import { themeChanger } from "../features/stats/statsSlice"
 
 const NavBarAlt = () => {
   const { isAuthenticated, user, loginWithRedirect } = useAuth0()
-  const { dispatch } = useDispatch()
-
-  const { theme } = useSelector((store) => store.stats)
-
-  const localHandler = () => {
-    if (theme === "corporate") {
-      dispatch(themeChanger("dark"))
-    }
-    if (theme === "dark") dispatch(themeChanger("corporate"))
-  }
-
-  useEffect(() => {
-    themeChange(false)
-  }, [])
 
   return (
     <>
@@ -123,7 +107,7 @@ const NavBarAlt = () => {
           </ul>
         </div>
         <div className="navbar-end gap-3">
-          <ToggleBtn data-set-theme={`${theme}`} onClick={localHandler} />
+          <ToggleBtn />
           {isAuthenticated ? <AuthLogout /> : <AuthLogin />}
           <Profile />
         </div>

@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { themeChange } from "theme-change"
+import { themeChanger } from "../features/stats/statsSlice"
 
 const ToggleBtn = () => {
-  const [theme, setTheme] = useState("light")
+  const dispatch = useDispatch()
 
-  const themeChanger = () => {
-    theme === "light" ? setTheme("dark") : setTheme("light")
+  const { theme } = useSelector((store) => store.stats)
+
+  const localHandler = () => {
+    if (theme === "corporate") {
+      return dispatch(themeChanger("dark"))
+    }
+    if (theme === "dark") dispatch(themeChanger("corporate"))
   }
 
   useEffect(() => {
     themeChange(false)
-  }, [theme])
+  }, [])
 
   return (
     <label className="relative inline-flex items-center cursor-pointer">
@@ -18,7 +25,7 @@ const ToggleBtn = () => {
       <div
         className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
         data-set-theme={`${theme}`}
-        onClick={themeChanger}
+        onClick={localHandler}
       ></div>
     </label>
   )

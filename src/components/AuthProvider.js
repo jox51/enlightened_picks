@@ -7,8 +7,8 @@ const AuthProvider = ({ children }) => {
 
   return (
     <Auth0Provider
-      domain={"dev-dbkcdpi2av5rl40i.us.auth0.com"}
-      clientId={"86Gm0u92z5aprr8tM7xKnXR7N7YQdgHT"}
+      domain={authDomain}
+      clientId={clientId}
       authorizationParams={{
         redirect_uri: window.location.origin
       }}

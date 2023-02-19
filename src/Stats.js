@@ -44,7 +44,6 @@ const Stats = () => {
 
   const localHandler = (e) => {
     e.preventDefault()
-    // dispatch(bounceReq(userUrl))
     dispatch(submitHandler(value))
     dispatch(oddsData())
   }
