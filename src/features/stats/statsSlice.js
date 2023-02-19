@@ -12,7 +12,7 @@ const initialState = {
   team: "",
   sport: "",
   stats: [],
-  theme: "coporate",
+  theme: "corporate",
   initSelection: [],
   selectedPicks: [],
   loadedPicks: [],
