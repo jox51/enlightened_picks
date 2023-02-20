@@ -1,3 +1,4 @@
+import React from "react"
 import Stats from "./Stats"
 
 const App = () => {
