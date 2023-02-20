@@ -19,22 +19,6 @@ module.exports = {
         "bookmark-blue": "#242A45",
         "bookmark-grey": "#9194A2",
         "bookmark-white": "#f7f7f7"
-      },
-      animation: {
-        typing: "typing 5s infinite steps(var(--ch-length))"
-      },
-      keyframes: {
-        typing: {
-          "0%": {
-            width: "0"
-          },
-          "80%": {
-            width: "47ch"
-          },
-          "100%": {
-            width: "47ch"
-          }
-        }
       }
     },
     container: {

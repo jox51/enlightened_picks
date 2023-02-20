@@ -3,7 +3,6 @@ import axios from "axios"
 
 const apiUrl = "https://odds.p.rapidapi.com/v4/sports"
 const apiKey = process.env.REACT_APP_API_KEY
-
 const apiHost = "odds.p.rapidapi.com"
 
 const initialState = {
