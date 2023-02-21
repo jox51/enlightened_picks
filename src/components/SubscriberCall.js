@@ -1,6 +1,16 @@
 import React from "react"
+import { useForm, ValidationError } from "@formspree/react"
 
 const SubscriberCall = () => {
+  const [state, handleSubmit] = useForm("mlekbpdp")
+  if (state.succeeded) {
+    return (
+      <p className="alert alert-success shadow-lg w-1/3 mx-auto">
+        Thanks for contacting us. Will reply as soon as possible
+      </p>
+    )
+  }
+
   return (
     <section>
       <div className="divider"></div>
@@ -12,17 +22,34 @@ const SubscriberCall = () => {
           </h2>
           <p className="mx-auto">Contact Us below if you have any questions</p>
           <div className="card-actions justify-center">
-            <div className="form-control w-full max-w-xs">
-              <label className="label">
+            <form
+              className="form-control w-full max-w-xs"
+              onSubmit={handleSubmit}
+            >
+              <label className="label" htmlFor="email">
                 <span className="label-text">Enter email below :</span>
               </label>
               <input
-                type="text"
+                id="email"
+                name="email"
+                type="email"
                 placeholder="Enter email"
                 className="input input-bordered w-full max-w-xs"
               />
-              <label className="label"></label>
-            </div>
+              <ValidationError
+                prefix="Email"
+                field="email"
+                errors={state.errors}
+              />
+
+              <button
+                className="btn my-2 mx-auto w-1/2"
+                type="submit"
+                disabled={state.submitting}
+              >
+                Submit
+              </button>
+            </form>
           </div>
         </div>
       </div>
