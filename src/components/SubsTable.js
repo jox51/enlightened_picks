@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useCallback, useState } from "react"
+import React, { useMemo, useRef, useCallback } from "react"
 import { AgGridReact } from "ag-grid-react"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -6,25 +6,18 @@ import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-alpine.css"
 import { useDispatch, useSelector } from "react-redux"
 import {
-  selectedHandler,
   clearSubsSelections,
   editComments,
-  addNewPlays,
   selectedFinalRows,
   sendSelects,
   grabPicks,
-  sendPublishedData,
-  refreshSubList
+  sendPublishedData
 } from "../features/stats/statsSlice"
-import { getRowContainerTypeForName } from "ag-grid-community"
 
 const SubsTable = ({ invisible, checkbox, rowData }) => {
   const {
-    loading,
-    value,
-    team,
     stats: { data },
-    logo,
+
     initSelection,
     finalPicks,
     loadedPicks,
@@ -35,17 +28,6 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
 
   // Below code converts data from server to AG Grid array data
   let convertArr = []
-  const picksConvert = loadedPicks.map((pick, id) => {
-    const { attributes } = pick
-    const { picks } = attributes
-    let tempArr = JSON.parse(picks)
-    // let sentArr = tempArr.map((item) => {
-    //   return convertArr.push(item)
-    // })
-    convertArr.push(tempArr)
-
-    return
-  })
 
   const columnDefs = [
     {
@@ -81,7 +63,6 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
     (event) => {
       const data = event.data
       const field = event.colDef.field
-      const newValue = event.newValue
       const newItem = { ...data }
       newItem[field] = event.newValue
 
@@ -124,26 +105,14 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
     dispatch(sendPublishedData())
   }, [])
 
-  // const getRowId = useMemo(() => {
-  //   return (params) => params.data.id
-  // }, [])
-  // let refreshArr = []
-
-  // const refreshItems = useCallback(() => {
-  //   const res = gridRef.current.api.applyTransaction({
-  //     update: [...refreshArr, { id: getRowId }]
-  //   })
-  // }, [])
-
+  // Adds row items from state. Rows selected from admin table
   const addItems = useCallback(() => {
     const res = gridRef.current.api.applyTransaction({
       add: finalPicks
     })
   }, [])
 
-  let initLoad = true
-  let loadArr = []
-
+  // Clears row items from table
   const clearHandler = () => {
     // grabs selected rows
     const selectedRows = gridRef.current.api.getSelectedRows()
@@ -154,21 +123,12 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
     })
 
     // grab selected rows uuid's
-    const selRowsIDs = selectedRows.map((
-      {
-        id: selected_id
-      }
-    ) => {
+    const selRowsIDs = selectedRows.map(({ id: selected_id }) => {
       return selected_id
     })
 
     // formats database entries for filtering
-    const formatDBEntries = loadedPicks.map((
-      {
-        id: sid,
-        attributes
-      }
-    ) => {
+    const formatDBEntries = loadedPicks.map(({ id: sid, attributes }) => {
       const { picks } = attributes
       let tempArr = JSON.parse(picks)
 
@@ -181,27 +141,17 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
     )
 
     // grabs all rows from the database
-    const dbPicks = filterEntries.map((
-      {
-        strapi_id,
-        tempArr
-      }
-    ) => {
+    const dbPicks = filterEntries.map(({ strapi_id, tempArr }) => {
       const { id } = tempArr
       return { strapi_id, id }
     })
 
     // if selected rows match rows in database, get the id created from database. Strapi has own id
     const selectedStrapiID = selRowsIDs.map((selItem) => {
-      return dbPicks.map((
-        {
-          id,
-          strapi_id
-        }
-      ) => {
+      return dbPicks.map(({ id, strapi_id }) => {
         if (String(id) !== String(selItem)) return
         else return strapi_id
-      });
+      })
     })
 
     // flatten array to better data
@@ -219,6 +169,7 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
     // get these id's and pass them to axios as delete request
     dispatch(sendSelects())
 
+    // grabs latest row selections to refresh latest data
     dispatch(grabPicks)
 
     // deletes row via transaction
@@ -227,17 +178,12 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
     })
   }
 
+  // Row ID's used for smoother row updates via transaction in AG Grid
   const getRowId = useCallback((params) => {
     return params.data.id
   })
 
-  // const testDelete = () => {
-  //   // grabs selected rows
-  //   const selectedRows = gridRef.current.api.getSelectedRows()
-  //   console.log(selectedRows)
-  //   dispatch(refreshSubList(selectedRows))
-  // }
-
+  // Subtable used in Admin page and Subs page. This filters out rows shown. Will only show subscibers selections and not edited rows.
   const rowDataToShow = () => {
     if (rowData === "admin") return postClearList
     if (rowData === "subscriber") return selectedPicks
@@ -256,9 +202,6 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
           Publish Selections
           <ToastContainer theme="colored" />
         </button>
-        {/* <button className={`btn m-3 ${invisible}`} onClick={testDelete}>
-          Test Delete
-        </button> */}
       </section>
       <AgGridReact
         rowData={rowDataToShow()}

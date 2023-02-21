@@ -10,13 +10,7 @@ import { generate as generateComb } from "ordered-uuid-v4"
 import { selectedHandler, clearStats } from "../features/stats/statsSlice"
 
 const Table = () => {
-  const {
-    loading,
-    value,
-    team,
-    stats: data,
-    logo
-  } = useSelector((store) => store.stats)
+  const { stats: data } = useSelector((store) => store.stats)
   const dispatch = useDispatch()
 
   const columnDefs = [
@@ -97,8 +91,9 @@ const Table = () => {
     dispatch(selectedHandler(selectedRows))
   }, [])
 
-  const updateFilter = () => {
-    const { api, columnApi } = gridRef.current
+  // Premium filter function
+  const premiumFilter = () => {
+    const { api } = gridRef.current
 
     // get filter instance
     const filterInstance = api.getFilterInstance("line_price")
@@ -106,21 +101,7 @@ const Table = () => {
     // get filter model
     const model = filterInstance.getModel()
 
-    // set filter model and update
-    // filterInstance.setModel({
-    //   filterType: "number",
-    //   operator: "AND",
-    //   condition1: {
-    //     filterType: "number",
-    //     type: "greaterThan",
-    //     filter: 2
-    //   },
-    //   condition2: {
-    //     filterType: "number",
-    //     type: "lessThan",
-    //     filter: 5
-    //   }
-    // })
+    // filters rows depending based on criteria
     filterInstance.setModel({
       filterType: "number",
       type: "inRange",
@@ -132,7 +113,7 @@ const Table = () => {
     api.onFilterChanged()
   }
   const clearFilter = () => {
-    const { api, columnApi } = gridRef.current
+    const { api } = gridRef.current
 
     // get filter instance
     const filterInstance = api.getFilterInstance("line_price")
@@ -140,21 +121,6 @@ const Table = () => {
     // get filter model
     const model = filterInstance.getModel()
 
-    // set filter model and update
-    // filterInstance.setModel({
-    //   filterType: "number",
-    //   operator: "AND",
-    //   condition1: {
-    //     filterType: "number",
-    //     type: "greaterThan",
-    //     filter: 2
-    //   },
-    //   condition2: {
-    //     filterType: "number",
-    //     type: "lessThan",
-    //     filter: 5
-    //   }
-    // })
     filterInstance.setModel({
       filterType: "number",
       type: "greaterThan",
@@ -172,7 +138,7 @@ const Table = () => {
   return (
     <div className="ag-theme-alpine h-3/4 w-30 m-10 pb-12 ">
       <section className="flex justify-center items-center p-5">
-        <button className="btn" onClick={updateFilter}>
+        <button className="btn" onClick={premiumFilter}>
           Premium Filter
         </button>
         <button className="btn ml-3" onClick={clearFilter}>

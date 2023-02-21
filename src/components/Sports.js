@@ -1,15 +1,9 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-import {
-  submitHandler,
-  handleChange,
-  oddsData
-} from "../features/stats/statsSlice"
-import Logo from "./Logo"
+import { submitHandler, oddsData } from "../features/stats/statsSlice"
 
 const Sports = () => {
   const dispatch = useDispatch()
-  const { loading, value, sport, stats } = useSelector((store) => store.stats)
 
   const localHandler = (e) => {
     e.preventDefault()

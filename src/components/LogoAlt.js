@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import Logo from "../components/Logo"
 import AuthLogin from "./AuthLogin"
@@ -19,6 +19,7 @@ const Admin = () => {
   )
 }
 
+// Toggles Mobile Menu
 const MobileMenu = () => {
   const [hideMenu, setHideMenu] = useState(false)
   const [classToShow, setClassToShow] = useState("")
@@ -42,7 +43,7 @@ const MobileMenu = () => {
 }
 
 const LogoAlt = () => {
-  const { isAuthenticated, user, loginWithRedirect } = useAuth0()
+  const { isAuthenticated } = useAuth0()
 
   const [showMenu, setShowMenu] = useState(false)
 

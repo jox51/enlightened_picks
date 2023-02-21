@@ -6,7 +6,6 @@ import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-alpine.css"
 import { useDispatch, useSelector } from "react-redux"
 import {
-  selectedHandler,
   clearSelections,
   editComments,
   addNewPlays,
@@ -17,14 +16,8 @@ import {
 
 const AdminTable = () => {
   const {
-    loading,
-    value,
-    team,
     stats: { data },
-    logo,
-    initSelection,
-    selectedPicks,
-    loadedPicks
+    initSelection
   } = useSelector((store) => store.stats)
   const dispatch = useDispatch()
 
@@ -63,7 +56,6 @@ const AdminTable = () => {
     (event) => {
       const data = event.data
       const field = event.colDef.field
-      const newValue = event.newValue
       const newItem = { ...data }
       newItem[field] = event.newValue
       console.log("event", event)

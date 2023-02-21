@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Link, Outlet } from "react-router-dom"
-  import logo4 from "../images/logo_four.png"
+import logo4 from "../images/logo_four.png"
 import AuthLogin from "../components/AuthLogin"
 import AuthLogout from "../components/AuthLogout"
 import Profile from "../components/Profile"
@@ -9,8 +9,9 @@ import AdminLinks from "../components/AdminLinks"
 import ToggleBtn from "../components/ToggleBtn"
 
 const NavBarAlt = () => {
-  const { isAuthenticated, user, loginWithRedirect } = useAuth0()
+  const { isAuthenticated } = useAuth0()
 
+  // Daisy UI responsive Navbar
   return (
     <>
       <div className="navbar bg-base-100">

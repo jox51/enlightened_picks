@@ -4,9 +4,16 @@ import Table from "../components/Table"
 import AdminTable from "../components/AdminTable"
 import Title from "../components/Title"
 import SubsTable from "../components/SubsTable"
-import LogoAlt from "../components/LogoAlt"
+import { useSelector } from "react-redux"
+import AlertDialog from "../components/AlertDialog"
 
 const Admin = () => {
+  const { stats } = useSelector((store) => store.stats)
+  const errMsg = "Request failed with status code 404"
+  const err = stats === errMsg ? true : false
+
+  if (err) return <AlertDialog />
+
   return (
     <>
       <div className="divider"></div>

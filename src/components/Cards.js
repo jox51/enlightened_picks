@@ -1,5 +1,4 @@
 import React from "react"
-import feature1 from "../images/features1.png"
 import sideHustle from "../images/side_hustle.jpg"
 import bettingLive from "../images/banner.jpg"
 import moneyFlying from "../images/moneyFlying.jpg"

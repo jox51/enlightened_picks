@@ -10,6 +10,7 @@ const initialState = {
   value: "",
   team: "",
   sport: "",
+  loadErr: "",
   stats: [],
   theme: "corporate",
   initSelection: [],
@@ -85,10 +86,9 @@ export const sendPublishedData = createAsyncThunk(
   }
 )
 
-export const grabPicks = createAsyncThunk("grab/picks", async (_, thunkAPI) => {
+export const grabPicks = createAsyncThunk("grab/picks", async () => {
   // params passing user input
   try {
-    const { selectedPicks } = thunkAPI.getState().stats
     const resp = await axios(`https://strapi-yt9z.onrender.com/api/picks`)
     return resp.data.data
   } catch (error) {
@@ -141,10 +141,7 @@ const statsSlice = createSlice({
     themeChanger: (state, { payload }) => {
       state.theme = payload
     },
-    clearSubsSelections: (
-      state,
-      { payload: { clearRows, sendIDs, resetGridArr } }
-    ) => {
+    clearSubsSelections: (state, { payload: { clearRows, sendIDs } }) => {
       state.selectedPicks = clearRows
       state.strapiIDs = sendIDs
     },
@@ -163,11 +160,7 @@ const statsSlice = createSlice({
     refreshSubList: (state, { payload }) => {
       let tempRowData = [...state.loadedPicks]
       let rowsToFilter = payload
-      let newRowData = tempRowData.map((
-        {
-          attributes
-        }
-      ) => {
+      let newRowData = tempRowData.map(({ attributes }) => {
         const { picks } = attributes
         let tempArr = JSON.parse(picks)
         return tempArr
@@ -187,30 +180,26 @@ const statsSlice = createSlice({
       .addCase(oddsData.fulfilled, (state, { payload }) => {
         state.loading = false
         state.stats = payload
-        // state.logo = payload.logo
       })
       .addCase(oddsData.rejected, (state, { payload }) => {
         state.loading = false
+        state.loadErr = payload
         console.log(payload)
       })
       .addCase(grabPicks.pending, (state) => {
         state.loading = true
       })
       .addCase(grabPicks.fulfilled, (state, { payload }) => {
-      state.loading = false
-      state.loadedPicks = payload
-      let tempRowData = payload
-      state.postClearList = tempRowData.map((
-        {
-          attributes
-        }
-      ) => {
-        const { picks } = attributes
-        let tempArr = JSON.parse(picks)
-        return tempArr
+        state.loading = false
+        state.loadedPicks = payload
+        let tempRowData = payload
+        state.postClearList = tempRowData.map(({ attributes }) => {
+          const { picks } = attributes
+          let tempArr = JSON.parse(picks)
+          return tempArr
+        })
       })
-    })
-      .addCase(grabPicks.rejected, (state, { payload }) => {
+      .addCase(grabPicks.rejected, (state) => {
         state.loading = false
       })
   }

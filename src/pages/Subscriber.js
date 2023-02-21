@@ -1,5 +1,4 @@
 import React from "react"
-import LogoAlt from "../components/LogoAlt"
 import SubscriberInfo from "../components/SubscriberInfo"
 import SubsTable from "../components/SubsTable"
 import Title from "../components/Title"

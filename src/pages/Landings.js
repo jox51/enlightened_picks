@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 
 import proof1 from "../images/proofs/image.png"
 import proof2 from "../images/proofs/image_1.png"
