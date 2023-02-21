@@ -163,18 +163,20 @@ const statsSlice = createSlice({
     refreshSubList: (state, { payload }) => {
       let tempRowData = [...state.loadedPicks]
       let rowsToFilter = payload
-      let newRowData = tempRowData.map((pick) => {
-        const { attributes } = pick
+      let newRowData = tempRowData.map((
+        {
+          attributes
+        }
+      ) => {
         const { picks } = attributes
         let tempArr = JSON.parse(picks)
         return tempArr
       })
       console.log(rowsToFilter)
-      let filteredRowData = newRowData.filter((x) => {
+
+      state.postClearList = newRowData.filter((x) => {
         return rowsToFilter.some((y) => y !== x)
       })
-
-      state.postClearList = filteredRowData
     }
   },
   extraReducers: (builder) => {
@@ -195,17 +197,19 @@ const statsSlice = createSlice({
         state.loading = true
       })
       .addCase(grabPicks.fulfilled, (state, { payload }) => {
-        state.loading = false
-        state.loadedPicks = payload
-        let tempRowData = payload
-        let newRowData = tempRowData.map((pick) => {
-          const { attributes } = pick
-          const { picks } = attributes
-          let tempArr = JSON.parse(picks)
-          return tempArr
-        })
-        state.postClearList = newRowData
+      state.loading = false
+      state.loadedPicks = payload
+      let tempRowData = payload
+      state.postClearList = tempRowData.map((
+        {
+          attributes
+        }
+      ) => {
+        const { picks } = attributes
+        let tempArr = JSON.parse(picks)
+        return tempArr
       })
+    })
       .addCase(grabPicks.rejected, (state, { payload }) => {
         state.loading = false
       })

@@ -1,0 +1,19 @@
+{
+    "rules": {
+        "remove-useless-return": "off",
+        "convert-esm-to-commonjs": "off",
+        "remove-unused-variables": "off",
+        "apply-destructuring/object": "off",
+        "remove-console": "off",
+        "remove-boolean-from-assertions": "off",
+        "remove-useless-else": "off",
+        "remove-useless-variables/destruct": "off",
+        "convert-equal-to-strict-equal": "off",
+        "apply-template-literals": "off",
+        "remove-useless-operand": "off",
+        "strict-mode/add-missing": "off",
+        "remove-useless-variables/remove": "on",
+        "convert-array-copy-to-slice": "off",
+        "remove-useless-variables": "on"
+    }
+}

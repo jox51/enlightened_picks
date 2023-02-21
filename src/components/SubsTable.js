@@ -154,14 +154,21 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
     })
 
     // grab selected rows uuid's
-    const selRowsIDs = selectedRows.map((sel) => {
-      const { id: selected_id } = sel
+    const selRowsIDs = selectedRows.map((
+      {
+        id: selected_id
+      }
+    ) => {
       return selected_id
     })
 
     // formats database entries for filtering
-    const formatDBEntries = loadedPicks.map((pick) => {
-      const { id: sid, attributes } = pick
+    const formatDBEntries = loadedPicks.map((
+      {
+        id: sid,
+        attributes
+      }
+    ) => {
       const { picks } = attributes
       let tempArr = JSON.parse(picks)
 
@@ -174,19 +181,27 @@ const SubsTable = ({ invisible, checkbox, rowData }) => {
     )
 
     // grabs all rows from the database
-    const dbPicks = filterEntries.map((pick) => {
-      const { strapi_id, tempArr } = pick
+    const dbPicks = filterEntries.map((
+      {
+        strapi_id,
+        tempArr
+      }
+    ) => {
       const { id } = tempArr
       return { strapi_id, id }
     })
 
     // if selected rows match rows in database, get the id created from database. Strapi has own id
     const selectedStrapiID = selRowsIDs.map((selItem) => {
-      return dbPicks.map((dbItem) => {
-        const { id, strapi_id } = dbItem
+      return dbPicks.map((
+        {
+          id,
+          strapi_id
+        }
+      ) => {
         if (String(id) !== String(selItem)) return
         else return strapi_id
-      })
+      });
     })
 
     // flatten array to better data

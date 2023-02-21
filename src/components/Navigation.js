@@ -8,7 +8,7 @@ const Navigation = () => {
         <div className="bg-white pt-4 pr-8 pb-4 pl-8">
           <div className="w-full">
             <div className="flex w-full justify-between max-w-screen-2xl md:flex-row mt-auto mr-auto mb-auto ml-auto">
-              <div className="flex flex-row bg-white justify-between items-center mt-2 mb-2 md:m-0 hidden md:flex">
+              <div className="flex flex-row bg-white justify-between items-center mt-2 mb-2 md:m-0 md:flex">
                 <a
                   href="#"
                   className="text-gray-600 text-center mr-6 font-medium text-base"

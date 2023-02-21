@@ -25,3 +25,7 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+.idea
+*.swp
+yarn-error.log
+coverage
