@@ -11,6 +11,8 @@ module.exports = {
   },
   plugins: ["react", "unused-imports"],
   rules: {
+    "react/prop-types": ["off"],
+    "react/no-unescaped-entities": 0,
     "no-unused-vars": "warn",
     "unused-imports/no-unused-imports": "warn",
     "unused-imports/no-unused-vars": [
