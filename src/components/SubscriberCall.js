@@ -1,11 +1,22 @@
-import React from "react"
+import React, { useState } from "react"
 import { useForm, ValidationError } from "@formspree/react"
 
 const SubscriberCall = () => {
   const [state, handleSubmit] = useForm("mlekbpdp")
+  const [clsHide, setClsHide] = useState("")
+
+  const closeHandler = () => {
+    setClsHide("hidden")
+  }
   if (state.succeeded) {
     return (
-      <p className="alert alert-success shadow-lg w-1/3 mx-auto">
+      <p
+        className={`${clsHide} alert alert-success shadow-lg w-1/3 mx-auto animate-fade animate-once animate-duration-[3000ms] animate-ease-in-out`}
+      >
+        <i
+          className="fa-regular fa-circle-xmark text-2xl cursor-pointer"
+          onClick={closeHandler}
+        ></i>
         Thanks for contacting us. Will reply as soon as possible
       </p>
     )
