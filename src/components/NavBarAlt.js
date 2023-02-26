@@ -11,8 +11,6 @@ import ToggleBtn from "../components/ToggleBtn"
 const NavBarAlt = () => {
   const { isAuthenticated, user } = useAuth0()
 
-  console.log("user info form Auth0 :", user?.elroles)
-
   // Daisy UI responsive Navbar
   return (
     <>
