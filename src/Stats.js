@@ -7,6 +7,7 @@ import About from "./pages/About"
 import PrivateRoute from "./components/PrivateRoute"
 import LandingThree from "./pages/LandingThree"
 import NavBarAlt from "./components/NavBarAlt"
+import SubSuccess from "./pages/SubSuccess"
 
 const Stats = () => {
   return (
@@ -17,6 +18,7 @@ const Stats = () => {
         <Route path="about_us" element={<About />} />
         <Route path="contact_us" element={<Contact />} />
         <Route path="landing_three" element={<LandingThree />} />
+        <Route path="success" element={<SubSuccess />} />
         <Route element={<PrivateRoute />}>
           <Route path="subscriber" element={<Subscriber />} />
           <Route path="admin" element={<Admin />} />

@@ -9,7 +9,9 @@ import AdminLinks from "../components/AdminLinks"
 import ToggleBtn from "../components/ToggleBtn"
 
 const NavBarAlt = () => {
-  const { isAuthenticated } = useAuth0()
+  const { isAuthenticated, user } = useAuth0()
+
+  console.log("user info form Auth0 :", user?.elroles)
 
   // Daisy UI responsive Navbar
   return (
@@ -37,7 +39,7 @@ const NavBarAlt = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {isAuthenticated && <AdminLinks />}
+              {user?.elroles === "subscriber" && <AdminLinks />}
               <li tabIndex={0}>
                 <a href="#" className="justify-between">
                   Learn More
@@ -76,7 +78,7 @@ const NavBarAlt = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            {isAuthenticated && <AdminLinks />}
+            {user?.elroles === "subscriber" && <AdminLinks />}
 
             <li tabIndex={0}>
               <a href="#">

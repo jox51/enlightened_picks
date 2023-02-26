@@ -1,4 +1,5 @@
 import React from "react"
+import PaypalBtn from "./PaypalBtn"
 
 const PricingCard = () => {
   return (
@@ -39,13 +40,14 @@ const PricingCard = () => {
               </span>
             </li>
           </ul>
+          <PaypalBtn />
           {/* Call to action */}
-          <a
+          {/* <a
             href="#"
             className="btn mt-8 block px-6 py-4 text-sm font-semibold text-center rounded-lg shadow-md mb-2"
           >
             Subscribe Now
-          </a>
+          </a> */}
         </div>
       </section>
     </>
