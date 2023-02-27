@@ -1,16 +1,15 @@
-import { Outlet, Navigate } from "react-router-dom"
 import React from "react"
+import { Outlet, Navigate } from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react"
 
-const PrivateRoute = () => {
+const PrivateRouteAdmin = () => {
   const { isAuthenticated, user, loginWithRedirect } = useAuth0()
-  console.log(user)
 
-  if (isAuthenticated && user?.elroles === "subscriber") {
+  if (isAuthenticated && user?.elroles === "admin") {
     return <Outlet />
   } else {
     return <Navigate to={loginWithRedirect()} />
   }
 }
 
-export default PrivateRoute
+export default PrivateRouteAdmin

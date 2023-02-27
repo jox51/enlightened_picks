@@ -5,6 +5,7 @@ import Subscriber from "./pages/Subscriber"
 import Contact from "./pages/Contact"
 import About from "./pages/About"
 import PrivateRoute from "./components/PrivateRoute"
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin"
 import LandingThree from "./pages/LandingThree"
 import NavBarAlt from "./components/NavBarAlt"
 import SubSuccess from "./pages/SubSuccess"
@@ -20,6 +21,9 @@ const Stats = () => {
         <Route path="landing_three" element={<LandingThree />} />
         <Route path="success" element={<SubSuccess />} />
         <Route element={<PrivateRoute />}>
+          <Route path="subscriber" element={<Subscriber />} />
+        </Route>
+        <Route element={<PrivateRouteAdmin />}>
           <Route path="subscriber" element={<Subscriber />} />
           <Route path="admin" element={<Admin />} />
         </Route>

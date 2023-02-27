@@ -7,6 +7,7 @@ import Profile from "../components/Profile"
 import { useAuth0 } from "@auth0/auth0-react"
 import AdminLinks from "../components/AdminLinks"
 import ToggleBtn from "../components/ToggleBtn"
+import SubLinks from "./SubLinks"
 
 const NavBarAlt = () => {
   const { isAuthenticated, user } = useAuth0()
@@ -37,7 +38,8 @@ const NavBarAlt = () => {
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              {user?.elroles === "subscriber" && <AdminLinks />}
+              {user?.elroles === "admin" && <AdminLinks />}
+              {user?.elroles === "subscriber" && <SubLinks />}
               <li tabIndex={0}>
                 <a href="#" className="justify-between">
                   Learn More
@@ -76,7 +78,8 @@ const NavBarAlt = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            {user?.elroles === "subscriber" && <AdminLinks />}
+            {user?.elroles === "admin" && <AdminLinks />}
+            {user?.elroles === "subscriber" && <SubLinks />}
 
             <li tabIndex={0}>
               <a href="#">
